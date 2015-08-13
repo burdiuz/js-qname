@@ -1,0 +1,32 @@
+{
+  "name": "js-qname",
+  "version": "0.0.1",
+  "main": [
+    "dist/qname.js"
+  ],
+  "moduleType": [
+    "globals"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+	"src",
+    "tests",
+    "node_modules",
+    "bower_components",
+	"gulpfile.js",
+	"index.html",
+	"karma.conf.js",
+	"package.json"
+  ],
+  "keywords": [
+    "qname",
+    "qualified",
+    "name",
+    "namespace"
+  ],
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}

@@ -25,7 +25,7 @@ define('QName', [], function() {
         },
         set: function(value) {
           if (value !== _localName) {
-            _localName = QName.normalize(value);
+            _localName = String(value);
           }
         }
       }
@@ -35,12 +35,33 @@ define('QName', [], function() {
   }
 
   QName.normalize = function(value) {
-    if (value === null || value === undefined) value = '';
-    return String(value);
+    if (value === undefined) value = '';
+    else if(value !== null) value = String(value);
+    return value;
   };
 
+  Object.defineProperties(QName, {
+    ANY_NAMESPACE: {
+      value: null,
+      writable: false,
+      configurable: false
+    },
+    GLOBAL_NAMESPACE: {
+      value: '',
+      writable: false,
+      configurable: false
+    }
+  });
+
   QName.prototype.isEqual = function(qname) {
-    return qname && qname.uri === this.uri && qname.localName === this.localName && true;
+    return Boolean(
+      qname && (
+        this.uri === null ||
+        qname.uri === null ||
+        qname.uri === this.uri
+      ) &&
+      qname.localName === this.localName
+    );
   };
 
   QName.prototype.clone = function() {
