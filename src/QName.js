@@ -3,7 +3,7 @@
  */
 'use strict';
 
-define('QName', [], function() {
+define('QName', ['Namespace'], function(Namespace) {
 
   function QName(uri, localName) {
     var _uri;
@@ -14,8 +14,11 @@ define('QName', [], function() {
           return _uri;
         },
         set: function(value) {
+          if(value instanceof Namespace){
+            value = value.uri;
+          }
           if (value !== _uri) {
-            _uri = QName.normalize(value);
+            _uri = Namespace.normalize(value);
           }
         }
       },
@@ -33,25 +36,6 @@ define('QName', [], function() {
     this.uri = uri;
     this.localName = localName;
   }
-
-  QName.normalize = function(value) {
-    if (value === undefined) value = '';
-    else if(value !== null) value = String(value);
-    return value;
-  };
-
-  Object.defineProperties(QName, {
-    ANY_NAMESPACE: {
-      value: null,
-      writable: false,
-      configurable: false
-    },
-    GLOBAL_NAMESPACE: {
-      value: '',
-      writable: false,
-      configurable: false
-    }
-  });
 
   QName.prototype.isEqual = function(qname) {
     return Boolean(
