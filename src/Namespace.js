@@ -29,6 +29,10 @@ define('Namespace', [], function() {
     return value;
   };
 
+  Namespace.prototype.toString = function() {
+    return this.uri;
+  };
+
   Namespace.prototype.isEqual = function(ns) {
     return Boolean(ns && this.isEqualURI(ns.uri));
   };
